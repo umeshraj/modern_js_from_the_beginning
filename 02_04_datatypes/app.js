@@ -1,4 +1,4 @@
-// PRIMITIVE
+// PRIMITIVE TYPES
 
 // String
 const name = 'Umesh';
@@ -22,4 +22,21 @@ console.log(typeof test);
 
 // Symbol
 const sym = Symbol();
-console.log(sym);
+console.log(typeof sym);
+
+// REFERENCE TYPES
+// Array
+const hobbies = ['movies', 'music'];
+console.log(typeof hobbies);
+
+// Object literal
+const address = {
+    city: 'New York',
+    state: 'NY'
+}
+console.log(typeof address);
+
+// Date
+const today = new Date();
+console.log(today);
+console.log(typeof today);
