@@ -84,3 +84,8 @@ for (let x in user){
     // console.log(x);
     console.log(`${x}: ${user[x]}`);
 }
+
+// FOR OF
+for (let car of cars){
+    console.log(car)
+}
