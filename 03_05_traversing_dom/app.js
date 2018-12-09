@@ -9,7 +9,7 @@ val = list;
 // Get child nodes. Returns NodeList
 val = list.childNodes;  // text nodes extra for line breaks
 val = list.childNodes[0];
-val = list.childNodes[0].nodeName;
+val = list.childNodes[0].nodeName;  // text, li etc
 val = list.childNodes[0].nodeType;
 
 // Node type
