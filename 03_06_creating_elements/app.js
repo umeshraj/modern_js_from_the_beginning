@@ -13,7 +13,7 @@ const txt = document.createTextNode('Hello, World!');
 li.appendChild(txt);
 // create new link element
 const link = document.createElement('a');
-link.className = "delete-item secondary-content";
+link.className = 'delete-item secondary-content';
 link.href = '#';
 // Add icon html
 link.innerHTML = '<i class="fa fa-remove"></i>';
