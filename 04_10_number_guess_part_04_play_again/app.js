@@ -26,6 +26,14 @@ const game = document.querySelector('#game'),
 minNum.textContent = min;
 maxNum.textContent = max;
 
+// Event listener for play again (event delegation)
+game.addEventListener('mousedown', function(e){
+    if (e.target.className === 'play-again'){
+        window.location.reload();
+    }
+});
+
+
 // Listen for guess
 guessBtn.addEventListener('click', function(){
     let guess = parseInt(guessInput.value);
@@ -72,4 +80,8 @@ function gameOver(won, msg){
     guessInput.style.borderColor = color;
     // Inform user of win
     setMessage(msg, color);
+
+    // Play again
+    guessBtn.value = 'Play again';
+    guessBtn.className += 'play-again';
 }
