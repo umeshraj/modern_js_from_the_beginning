@@ -25,7 +25,7 @@ function Customer(firstName, lastName, phone, membership){
 Customer.prototype = Object.create(Person.prototype);
 
 // Make customer.prototype return Customer()
-// Customer.prototype.constructor = Customer;
+Customer.prototype.constructor = Customer;
 
 const customer1 = new Customer('Tom', 'Smith', '555-55-5555', 'Standard');
 
