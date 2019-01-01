@@ -1,5 +1,12 @@
 async function myFunc() {
-  return "Hello";
+  // return "Hello";
+
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Hello"), 1000);
+  });
+
+  const res = await promise; // wait until promise is resolved
+  return res;
 }
 
 // console.log(myFunc());
