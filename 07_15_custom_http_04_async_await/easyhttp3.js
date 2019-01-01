@@ -44,18 +44,16 @@ class EasyHTTP {
   }
 
   //  make HTTP DELETE request
-  delete(url) {
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-        .then(res => res.json())
-        .then(() => resolve("Resource deleted.."))
-        .catch(err => reject(err));
+  async delete(url) {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(data)
     });
+
+    const resData = await "Resource deleted..";
+    return resData;
   }
 }

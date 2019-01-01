@@ -19,14 +19,14 @@ const data = {
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err));
 
-// Update user with PUT
-http
-  .put("https://jsonplaceholder.typicode.com/users/2", data)
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
-
-// // Remove user with DELETE
+// // Update user with PUT
 // http
-//   .delete("https://jsonplaceholder.typicode.com/users/2")
+//   .put("https://jsonplaceholder.typicode.com/users/2", data)
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err));
+
+// Remove user with DELETE
+http
+  .delete("https://jsonplaceholder.typicode.com/users/2")
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
