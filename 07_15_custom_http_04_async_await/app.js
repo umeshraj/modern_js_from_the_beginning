@@ -1,10 +1,10 @@
 const http = new EasyHTTP();
 
-// Get Users
-http
-  .get("https://jsonplaceholder.typicode.com/users")
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
+// // Get Users
+// http
+//   .get("https://jsonplaceholder.typicode.com/users")
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err));
 
 // user data
 const data = {
@@ -13,12 +13,12 @@ const data = {
   email: "jdoe@gmail.com"
 };
 
-// // Posting data
-// // create user
-// http
-//   .post("https://jsonplaceholder.typicode.com/users", data)
-//   .then(data => console.log(data))
-//   .catch(err => console.log(err));
+// Posting data
+// create user
+http
+  .post("https://jsonplaceholder.typicode.com/users", data)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 
 // // Update user with PUT
 // http
