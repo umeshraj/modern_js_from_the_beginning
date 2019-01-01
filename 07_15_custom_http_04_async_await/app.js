@@ -13,18 +13,17 @@ const data = {
   email: "jdoe@gmail.com"
 };
 
-// Posting data
-// create user
-http
-  .post("https://jsonplaceholder.typicode.com/users", data)
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
-
-// // Update user with PUT
+// // Posting data
 // http
-//   .put("https://jsonplaceholder.typicode.com/users/2", data)
+//   .post("https://jsonplaceholder.typicode.com/users", data)
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err));
+
+// Update user with PUT
+http
+  .put("https://jsonplaceholder.typicode.com/users/2", data)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 
 // // Remove user with DELETE
 // http
