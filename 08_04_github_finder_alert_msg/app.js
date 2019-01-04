@@ -22,5 +22,6 @@ searchUser.addEventListener("keyup", e => {
     });
   } else {
     //   Clear the profile if no input
+    ui.clearProfile();
   }
 });
