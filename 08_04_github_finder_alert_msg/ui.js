@@ -3,6 +3,7 @@ class UI {
     this.profile = document.getElementById("profile");
   }
 
+  // Display profile in ui
   showProfile(user) {
     // console.log(user);
     this.profile.innerHTML = `
@@ -42,7 +43,23 @@ class UI {
         `;
   }
 
+  // clear profile
   clearProfile() {
     ui.profile.innerHTML = "";
+  }
+
+  // Show alert message
+  showAlert(message, className) {
+    // create div
+    const div = document.createElement("div");
+    div.className = className;
+    // add text
+    div.appendChild(document.createTextNode(message));
+    // Get parent
+    const container = document.querySelector(".searchContainer");
+    // Get search box
+    const search = document.querySelector(".search");
+    // Insert alert
+    container.insertBefore(div, search);
   }
 }
