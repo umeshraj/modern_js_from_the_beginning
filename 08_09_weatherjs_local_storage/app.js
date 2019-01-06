@@ -17,6 +17,8 @@ document.getElementById("w-change-btn").addEventListener("click", () => {
   const state = document.getElementById("state").value;
   weather.changeLocation(city, state);
 
+  // Set location in local storage
+  storage.setLocationData(city, state);
   // get and display weather
   getWeather();
 
@@ -27,7 +29,6 @@ document.getElementById("w-change-btn").addEventListener("click", () => {
 function getWeather() {
   weather
     .getWeather()
-    // .then(results => console.log(results))
     .then(results => ui.paint(results))
     .catch(err => console.log(err));
 }
