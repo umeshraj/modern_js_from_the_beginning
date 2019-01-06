@@ -1,5 +1,10 @@
+// Init storage
+const storage = new Storage();
+// Get stored location data
+const weatherLocation = storage.getLocationData();
+
 // Init weather object
-const weather = new Weather("Boston", "US");
+const weather = new Weather(weatherLocation.city, weatherLocation.state);
 // Init UI class
 const ui = new UI();
 
