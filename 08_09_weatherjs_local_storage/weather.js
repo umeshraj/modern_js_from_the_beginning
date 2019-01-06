@@ -22,7 +22,7 @@ class Weather {
       this.countryCode
     }&APPID=${this.apiKey}
       `;
-    console.log(url);
+
     //   Get data
     const response = await fetch(url);
     const responseData = await response.json();
