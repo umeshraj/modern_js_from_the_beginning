@@ -34,8 +34,23 @@ re = /hel{2,}o/i; // must occur at least 2 times (helo will fail)
 re = /[0-9]x{3}/; // looks for number, xxx
 re = /([0-9]x){3}/; // looks for 2x2x2x
 
+// Shorthand character classes
+re = /\w/; // word character - alphanumeric or_
+re = /\w+/; // word character - alphanumeric or_ 1 or more
+re = /\W/; // non-word character - alphanumeric or_
+re = /\d/; // match any digit
+re = /\d+/; // match any digit 1 or more times
+re = /\D/; // match non-digit
+re = /\s/; // match white space character (space, tab)
+re = /\S/; // match non-white space character (space, tab)
+re = /Hell\b/i; // word boundary (full word)
+
+// Assertions (like conditionals)
+re = /x(?=y)/; // match x only if followed by y
+re = /x(?!y)/; // match x only if NOT followed by y
+
 // String to match
-const str = "1x1x1x";
+const str = "saxfdxysfsafss";
 
 // Log results
 const result = re.exec(str);
