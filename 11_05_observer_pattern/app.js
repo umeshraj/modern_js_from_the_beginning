@@ -35,6 +35,14 @@ document.querySelector(".unsub-ms").addEventListener("click", function() {
   click.unsubscribe(getCurMilliseconds);
 });
 
+document.querySelector(".sub-s").addEventListener("click", function() {
+  click.subscribe(getCurSeconds);
+});
+
+document.querySelector(".unsub-s").addEventListener("click", function() {
+  click.unsubscribe(getCurSeconds);
+});
+
 document.querySelector(".fire").addEventListener("click", function() {
   click.fire();
 });
@@ -42,4 +50,8 @@ document.querySelector(".fire").addEventListener("click", function() {
 // click handles
 const getCurMilliseconds = function() {
   console.log(`Current ms: ${new Date().getMilliseconds()}`);
+};
+
+const getCurSeconds = function() {
+  console.log(`Current s: ${new Date().getSeconds()}`);
 };
