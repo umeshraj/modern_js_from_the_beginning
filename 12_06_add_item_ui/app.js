@@ -12,9 +12,9 @@ const ItemCtrl = (function() {
   // Data structure / state
   const data = {
     items: [
-      { id: 0, name: "Steak dinner", calories: 1200 },
-      { id: 1, name: "Cookie", calories: 400 },
-      { id: 2, name: "Eggs", calories: 300 }
+      // { id: 0, name: "Steak dinner", calories: 1200 },
+      // { id: 1, name: "Cookie", calories: 400 },
+      // { id: 2, name: "Eggs", calories: 300 }
     ],
     currentItem: null,
     totalCalories: 0
@@ -85,6 +85,8 @@ const UICtrl = (function() {
       };
     },
     addListItem: function(item) {
+      // unhide a hidden list
+      document.querySelector(UISelectors.itemList).style.display = "block";
       // create li element
       const li = document.createElement("li");
       // add class
@@ -107,6 +109,9 @@ const UICtrl = (function() {
     clearInput: function() {
       document.querySelector(UISelectors.itemNameInput).value = "";
       document.querySelector(UISelectors.itemCaloriesInput).value = "";
+    },
+    hideList: function() {
+      document.querySelector(UISelectors.itemList).style.display = "none";
     },
     getSelectors: function() {
       return UISelectors;
@@ -153,9 +158,14 @@ const App = (function(ItemCtrl, UICtrl) {
       //   fetch items from data strcuture
       const items = ItemCtrl.getItems();
 
-      // populate list with items
-      UICtrl.populateItemList(items);
-      console.log(items);
+      // check if any items
+      if (items.length == 0) {
+        UICtrl.hideList();
+      } else {
+        // populate list with items
+        UICtrl.populateItemList(items);
+        // console.log(items);
+      }
 
       // Load event listeners
       loadEventListeners();
