@@ -45,6 +45,25 @@ const ItemCtrl = (function() {
       return newItem;
     },
 
+    setCurrentItem: function(item) {
+      data.currentItem = item;
+    },
+
+    getCurrentItem: function() {
+      return data.currentItem;
+    },
+
+    getItemById: function(id) {
+      let found = null;
+      // loop through items
+      data.items.forEach(function(item) {
+        if (item.id == id) {
+          found = item;
+        }
+      });
+      return found;
+    },
+
     getTotalCalories: function() {
       let total = 0;
       // loop through items and add cals
@@ -68,6 +87,9 @@ const UICtrl = (function() {
   const UISelectors = {
     itemList: "#item-list",
     addBtn: ".add-btn",
+    updateBtn: ".update-btn",
+    deleteBtn: ".delete-btn",
+    backBtn: ".back-btn",
     itemNameInput: "#item-name",
     itemCaloriesInput: "#item-calories",
     totalCalories: ".total-calories"
@@ -106,7 +128,7 @@ const UICtrl = (function() {
       // add class
       li.className = "collection-item";
       // add id
-      li.id = `item=${item.id}`;
+      li.id = `item-${item.id}`;
 
       // add html
       li.innerHTML = `<strong>${item.name}: </strong> <em>${
@@ -124,6 +146,16 @@ const UICtrl = (function() {
       document.querySelector(UISelectors.itemNameInput).value = "";
       document.querySelector(UISelectors.itemCaloriesInput).value = "";
     },
+    addItemToForm: function() {
+      document.querySelector(
+        UISelectors.itemNameInput
+      ).value = ItemCtrl.getCurrentItem().name;
+      document.querySelector(
+        UISelectors.itemCaloriesInput
+      ).value = ItemCtrl.getCurrentItem().calories;
+      // show buttons
+      UICtrl.showEditState();
+    },
     hideList: function() {
       document.querySelector(UISelectors.itemList).style.display = "none";
     },
@@ -131,6 +163,19 @@ const UICtrl = (function() {
       document.querySelector(
         UISelectors.totalCalories
       ).textContent = totalCalories;
+    },
+    clearEditState: function() {
+      UICtrl.clearInput();
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+      document.querySelector(UISelectors.addBtn).style.display = "inline";
+    },
+    showEditState: function() {
+      document.querySelector(UISelectors.updateBtn).style.display = "inline";
+      document.querySelector(UISelectors.deleteBtn).style.display = "inline";
+      document.querySelector(UISelectors.backBtn).style.display = "inline";
+      document.querySelector(UISelectors.addBtn).style.display = "none";
     },
     getSelectors: function() {
       return UISelectors;
@@ -140,6 +185,9 @@ const UICtrl = (function() {
 
 // App controller
 const App = (function(ItemCtrl, UICtrl) {
+  // Clear edit state / set initial state
+  UICtrl.clearEditState();
+
   // load event listeners
   const loadEventListeners = function() {
     // Get UI selectors
@@ -149,6 +197,11 @@ const App = (function(ItemCtrl, UICtrl) {
     document
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
+
+    // Edit icon click event (event delegation)
+    document
+      .querySelector(UISelectors.itemList)
+      .addEventListener("click", itemUpdateSubmit);
   };
 
   // Add item submit
@@ -173,6 +226,29 @@ const App = (function(ItemCtrl, UICtrl) {
       UICtrl.clearInput();
     }
 
+    e.preventDefault();
+  };
+
+  // update item submit
+  const itemUpdateSubmit = function(e) {
+    if (e.target.classList.contains("edit-item")) {
+      // load clicked item into inputs
+      // get list item id (item-0, item-1)
+      const listid = e.target.parentNode.parentNode.id;
+
+      // break id into an array
+      const listIdArr = listid.split("-");
+      // get the actual id
+      const id = parseInt(listIdArr[1]);
+      // get item
+      const itemToEdit = ItemCtrl.getItemById(id);
+
+      // Set current item
+      ItemCtrl.setCurrentItem(itemToEdit);
+
+      // Add item to form
+      UICtrl.addItemToForm();
+    }
     e.preventDefault();
   };
 
