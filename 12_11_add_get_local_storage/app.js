@@ -1,4 +1,35 @@
 // Storage controller
+const StorageCtrl = (function() {
+  // Public methods
+  return {
+    storeItem: function(item) {
+      let items;
+      // check if any items in local storage
+      if (localStorage.getItem("items") === null) {
+        items = [];
+        // push new item
+        items.push(item);
+        // set ls
+        localStorage.setItem("items", JSON.stringify(items));
+      } else {
+        // get what is in ls
+        items = JSON.parse(localStorage.getItem("items"));
+        items.push(item);
+        // reset local storage
+        localStorage.setItem("items", JSON.stringify(items));
+      }
+    },
+    getItemsFromStorage: function() {
+      let items;
+      if (localStorage.getItem("items") === null) {
+        items = [];
+      } else {
+        items = JSON.parse(localStorage.getItem("items"));
+      }
+      return items;
+    }
+  };
+})();
 
 // Item controller (module pattern!)
 const ItemCtrl = (function() {
@@ -11,11 +42,12 @@ const ItemCtrl = (function() {
 
   // Data structure / state
   const data = {
-    items: [
-      // { id: 0, name: "Steak dinner", calories: 1200 },
-      // { id: 1, name: "Cookie", calories: 400 },
-      // { id: 2, name: "Eggs", calories: 300 }
-    ],
+    // items: [
+    //   // { id: 0, name: "Steak dinner", calories: 1200 },
+    //   // { id: 1, name: "Cookie", calories: 400 },
+    //   // { id: 2, name: "Eggs", calories: 300 }
+    // ],
+    items: StorageCtrl.getItemsFromStorage(),
     currentItem: null,
     totalCalories: 0
   };
@@ -244,7 +276,7 @@ const UICtrl = (function() {
 })();
 
 // App controller
-const App = (function(ItemCtrl, UICtrl) {
+const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
   // Clear edit state / set initial state
   UICtrl.clearEditState();
 
@@ -312,6 +344,9 @@ const App = (function(ItemCtrl, UICtrl) {
       const totalCalories = ItemCtrl.getTotalCalories();
       // Add total calories to UI
       UICtrl.showTotalCalories(totalCalories);
+
+      // Store in local storage
+      StorageCtrl.storeItem(newItem);
 
       // clear fields
       UICtrl.clearInput();
@@ -425,7 +460,7 @@ const App = (function(ItemCtrl, UICtrl) {
       loadEventListeners();
     }
   };
-})(ItemCtrl, UICtrl);
+})(ItemCtrl, StorageCtrl, UICtrl);
 
 // Initialize App
 App.init();
