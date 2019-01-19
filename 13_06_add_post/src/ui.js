@@ -29,6 +29,40 @@ class UI {
     });
     this.post.innerHTML = output;
   }
+
+  showAlert(message, className) {
+    this.clearAlert();
+
+    // create div
+    const div = document.createElement("div");
+    // add classes
+    div.className = className;
+    // Add text
+    div.appendChild(document.createTextNode(message));
+    // insert to DOM
+    const container = document.querySelector(".postContainer");
+    // Get posts
+    const posts = document.querySelector("#posts");
+    // insert alert
+    container.insertBefore(div, posts);
+
+    // time out
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000);
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector(".alert");
+    if (currentAlert) {
+      currentAlert.remove();
+    }
+  }
+
+  clearFields() {
+    this.titleInput.value = "";
+    this.bodyInput.value = "";
+  }
 }
 
 export const ui = new UI();
