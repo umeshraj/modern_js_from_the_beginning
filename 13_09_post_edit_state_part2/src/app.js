@@ -28,25 +28,40 @@ function getPosts() {
 function submitPost() {
   const title = document.querySelector("#title").value;
   const body = document.querySelector("#body").value;
+  const id = document.querySelector("#id").value;
+  const data = {
+    title: title,
+    body: body
+  };
 
-  // prevent blank posts
+  // validate input
   if (title === "" || body === "") {
     ui.showAlert("Please fill in all fields", "alert alert-danger");
   } else {
-    const data = {
-      title: title,
-      body: body
-    };
+    // check if add or edit (hidden id)
 
-    //   create post
-    http
-      .post("http://localhost:3000/posts", data)
-      .then(data => {
-        ui.showAlert("Post added", "alert alert-success");
-        ui.clearFields();
-        getPosts();
-      })
-      .catch(err => console.log(err));
+    // check for id
+    if (id === "") {
+      //   create post
+      http
+        .post("http://localhost:3000/posts", data)
+        .then(data => {
+          ui.showAlert("Post added", "alert alert-success");
+          ui.clearFields();
+          getPosts();
+        })
+        .catch(err => console.log(err));
+    } else {
+      // update the post (put request)
+      http
+        .put(`http://localhost:3000/posts/${id}`, data)
+        .then(data => {
+          ui.showAlert("Post updated", "alert alert-success");
+          ui.changeFormState("add");
+          getPosts();
+        })
+        .catch(err => console.log(err));
+    }
   }
 }
 
