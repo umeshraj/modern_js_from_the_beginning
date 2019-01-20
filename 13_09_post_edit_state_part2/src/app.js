@@ -26,20 +26,25 @@ function submitPost() {
   const title = document.querySelector("#title").value;
   const body = document.querySelector("#body").value;
 
-  const data = {
-    title: title,
-    body: body
-  };
+  // prevent blank posts
+  if (title === "" || body === "") {
+    ui.showAlert("Please fill in all fields", "alert alert-danger");
+  } else {
+    const data = {
+      title: title,
+      body: body
+    };
 
-  //   create post
-  http
-    .post("http://localhost:3000/posts", data)
-    .then(data => {
-      ui.showAlert("Post added", "alert alert-success");
-      ui.clearFields();
-      getPosts();
-    })
-    .catch(err => console.log(err));
+    //   create post
+    http
+      .post("http://localhost:3000/posts", data)
+      .then(data => {
+        ui.showAlert("Post added", "alert alert-success");
+        ui.clearFields();
+        getPosts();
+      })
+      .catch(err => console.log(err));
+  }
 }
 
 // delete post

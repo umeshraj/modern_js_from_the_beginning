@@ -98,9 +98,6 @@ class UI {
       const cardForm = document.querySelector(".card-form");
       // Get element to insert before
       const formEnd = document.querySelector(".form-end");
-      console.log(button);
-      console.log(cardForm);
-      console.log(formEnd);
       // insert cancel button
       cardForm.insertBefore(button, formEnd);
     } else {
